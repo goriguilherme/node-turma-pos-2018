@@ -37,7 +37,6 @@ app.get('/tasks/:taskId', (request, response) => {
     } else {
         response.status(404);
         response.send();
-        
     }
 
 });
