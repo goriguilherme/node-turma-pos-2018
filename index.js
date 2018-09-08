@@ -41,6 +41,36 @@ app.get('/tasks/:taskId', (request, response) => {
 
 });
 
+app.put('/tasks/:taskId', (request, response) => {
+  
+    const { body } = request;
+    const task = tasks.find(t => t.id == request.params.taskId);
+  
+    if (task) {
+        task.title = body.title; 
+        task.resume = body.resume; 
+        task.isDone = body.isDone; 
+        task.isPriority = body.isPriority;
+        response.send(task); 
+    } else {
+        response.status(404);
+        response.send(); 
+    }
+});
+
+app.delete('/tasks/:taskId', (request, response) => {
+      
+    const task = tasks.find(t => t.id == request.params.taskId); 
+    
+    if (task) {
+        tasks.pop(task);
+        response.send(task); 
+    } else {
+        response.status(404);
+        response.send(); 
+    }
+});
+
 app.listen(3000, () => {
     console.log('Server Running on port 3000');
 });
